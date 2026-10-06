@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="ember" data-font="system">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Continuity Binder | LedgerLoopStudio (Free Demo)</title>
+<meta name="description" content="If you couldn't run your business tomorrow, could anyone else? A complete continuity binder for freelancers and small business owners. Offline, private, no account.">
+<style>
+/* ================================================================
+   LEDGERLOOPSTUDIO — "EMBER VAULT" VISUAL IDENTITY
+   Dark plum-charcoal surfaces, warm copper accents, cream paper
+   cards. Wax-seal stamps, vault-door hero, dossier tabs.
+   System fonts only. Offline single file.
+   Display: serif · UI: system sans.
+   ================================================================ */
+:root, [data-theme="ember"]{
+  color-scheme:dark;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-display:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --bg:#171219; --bg2:#100C13; --surface:#221A26; --surface2:#2A212F;
+  --text:#F5EFE4; --muted:#B9AFA1; --faint:#7A6F66;
+  --line:#3A2F3E; --line2:#4A3C50;
+  --accent:#D08A4E; --accent-d:#A86A34; --accent-t:#3A2A1C; --accent-line:#8A5A30;
+  --paper:#F7F1E4; --paper-text:#2A2118;
+  --seal:#C25E4B;
+  --good:#7FB069; --good-t:#1E3323;
+  --danger:#D95F52; --danger-t:#3D1F1B;
+  --warn:#D8A24A; --warn-t:#3A2E14;
+  --shadow:0 14px 36px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.3);
+  --shadow-s:0 4px 16px rgba(0,0,0,.35);
+  --radius:18px; --radius-s:12px;
+  --font:var(--font-sans);
+}
+[data-theme="cream"]{
+  color-scheme:light;
+  --bg:#F4EDDF; --bg2:#EAE0CC; --surface:#FFFDF6; --surface2:#FAF5E9;
+  --text:#2A2118; --muted:#7A6B58; --faint:#B0A18A;
+  --line:#E3D6BC; --line2:#D2C2A4;
+  --accent:#B06A2E; --accent-d:#8A5222; --accent-t:#F5E7D2; --accent-line:#D8B48A;
+  --paper:#F7F1E4; --paper-text:#2A2118;
+  --seal:#B4543F;
+  --good:#4E8A44; --good-t:#E2F0DF;
+  --danger:#B23A28; --danger-t:#F9E4DE;
+  --warn:#A87418; --warn-t:#F7ECD2;
+  --shadow:0 14px 36px rgba(60,42,20,.10), 0 2px 8px rgba(60,42,20,.06);
+  --shadow-s:0 4px 16px rgba(60,42,20,.08);
+  --radius:18px; --radius-s:12px;
+  --font:var(--font-sans);
+}
+[data-theme="copper"]{
+  color-scheme:dark;
+  --bg:#1B130D; --bg2:#120C08; --surface:#251A11; --surface2:#2E2216;
+  --text:#F8F0E2; --muted:#C0A98D; --faint:#8A755C;
+  --line:#42301D; --line2:#543E26;
+  --accent:#E0975A; --accent-d:#B06A2E; --accent-t:#402A16; --accent-line:#8A5A2E;
+  --paper:#F7F1E4; --paper-text:#2A2118;
+  --seal:#C25E4B;
+  --good:#86B06A; --good-t:#22351C;
+  --danger:#DE6B5C; --danger-t:#42211B;
+  --warn:#DFAF55; --warn-t:#40300F;
+  --shadow:0 14px 36px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.3);
+  --shadow-s:0 4px 16px rgba(0,0,0,.35);
+  --radius:18px; --radius-s:12px;
+  --font:var(--font-sans);
+}
+[data-theme="slate"]{
+  color-scheme:dark;
+  --bg:#14161C; --bg2:#0E1014; --surface:#1D2029; --surface2:#242834;
+  --text:#EEF0F4; --muted:#A8ADB8; --faint:#6E7480;
+  --line:#2E3340; --line2:#3C4252;
+  --accent:#C98F56; --accent-d:#9A6A3A; --accent-t:#33271A; --accent-line:#7A5A34;
+  --paper:#F7F1E4; --paper-text:#2A2118;
+  --seal:#BE5A46;
+  --good:#7FB069; --good-t:#1E3323;
+  --danger:#D95F52; --danger-t:#3D1F1B;
+  --warn:#D8A24A; --warn-t:#3A2E14;
+  --shadow:0 14px 36px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.3);
+  --shadow-s:0 4px 16px rgba(0,0,0,.35);
+  --radius:18px; --radius-s:12px;
+  --font:var(--font-sans);
+}
+[data-theme="midnight"]{
+  color-scheme:dark;
+  --bg:#0C0A10; --bg2:#080609; --surface:#151218; --surface2:#1B1620;
+  --text:#F2ECE2; --muted:#A89C8E; --faint:#6E6357;
+  --line:#2A2430; --line2:#382F42;
+  --accent:#C9854A; --accent-d:#9A5F30; --accent-t:#332416; --accent-line:#7A5028;
+  --paper:#F7F1E4; --paper-text:#2A2118;
+  --seal:#B4543F;
+  --good:#7FB069; --good-t:#1E3323;
+  --danger:#D95F52; --danger-t:#3D1F1B;
+  --warn:#D8A24A; --warn-t:#3A2E14;
+  --shadow:0 14px 36px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.35);
+  --shadow-s:0 4px 16px rgba(0,0,0,.4);
+  --radius:18px; --radius-s:12px;
+  --font:var(--font-sans);
+}
+[data-font="serif"]{ --font:Georgia,"Iowan Old Style","Palatino Linotype",serif; }
+[data-font="mono"]{ --font:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+[data-font="rounded"]{ --font:ui-rounded,"SF Pro Rounded","Hiragino Maru Gothic ProN",system-ui,sans-serif; }
+*{box-sizing:border-box; margin:0; padding:0;}
+html{ -webkit-text-size-adjust:100%; }
+body{
+  font-family:var(--font); background:var(--bg); color:var(--text);
+  min-height:100vh; line-height:1.5; transition:background .3s, color .3s;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(900px 420px at 10% -6%, var(--accent-t), transparent 60%),
+    radial-gradient(760px 380px at 96% 10%, var(--accent-t), transparent 55%);
+  opacity:.5;
+}
+.wrap{ max-width:1180px; margin:0 auto; padding:0 22px 90px; position:relative; z-index:1;}
+/* ---------- header ---------- */
+header.top{
+  display:flex; align-items:center; gap:14px; padding:20px 0 6px; flex-wrap:wrap;
+}
+.brand{ display:flex; align-items:center; gap:12px; margin-right:auto;}
+.brand .vault{
+  width:46px; height:46px; border-radius:50%; display:grid; place-items:center;
+  background:radial-gradient(circle at 32% 30%, var(--accent), var(--accent-d));
+  color:#1B1208; font-size:22px; box-shadow:var(--shadow-s);
+  border:2px solid var(--accent-line);
+}
+.brand b{ font-family:var(--font-display); font-size:20px; letter-spacing:.2px; display:block; line-height:1.1;}
+.brand small{ color:var(--muted); font-size:11px; letter-spacing:2.5px; text-transform:uppercase;}
+.themebox{ display:flex; align-items:center; gap:8px; background:var(--surface);
+  border:1px solid var(--line); border-radius:999px; padding:6px 8px; box-shadow:var(--shadow-s);}
+.themebox select, .themebox button{
+  background:transparent; border:1px solid var(--line); color:var(--text);
+  border-radius:999px; padding:6px 12px; font-size:13px; cursor:pointer; font-family:var(--font);
+}
+.themebox button{ background:var(--accent-t); border-color:var(--accent-line); font-weight:600;}
+.themebox select option{ background:var(--surface); color:var(--text);}
+/* ---------- dossier nav ---------- */
+nav#mainNav{ display:flex; gap:6px; flex-wrap:wrap; margin:14px 0 22px;
+  border-bottom:2px solid var(--line); padding-bottom:0;}
+nav#mainNav button{
+  font-family:var(--font); font-size:14px; font-weight:600; color:var(--muted);
+  background:var(--surface); border:1px solid var(--line); border-bottom:none;
+  border-radius:12px 12px 0 0; padding:11px 16px; cursor:pointer;
+  transition:all .18s; margin-bottom:-2px;
+}
+nav#mainNav button:hover{ color:var(--text); background:var(--surface2);}
+nav#mainNav button.active{
+  color:var(--accent); background:var(--surface2); border-color:var(--accent-line);
+  border-bottom:2px solid var(--bg); box-shadow:inset 0 3px 0 var(--accent);
+}
+/* ---------- views/cards ---------- */
+.view{ display:none; animation:fadein .28s ease;}
+.view.active{ display:block;}
+@keyframes fadein{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:22px; box-shadow:var(--shadow-s); margin-bottom:18px; position:relative;
+}
+.card h3{ font-family:var(--font-display); font-size:20px; margin-bottom:4px; letter-spacing:.2px;}
+.card .sub{ color:var(--muted); font-size:13.5px; margin-bottom:14px;}
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+.grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+.grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+@media(max-width:900px){ .grid4{grid-template-columns:1fr 1fr;} .grid3{grid-template-columns:1fr;} .grid2{grid-template-columns:1fr;} }
+/* ---------- vault hero ---------- */
+.vault-hero{
+  background:linear-gradient(160deg, var(--surface2), var(--surface));
+  border:1px solid var(--accent-line); border-radius:26px; padding:34px 30px;
+  box-shadow:var(--shadow); margin-bottom:20px; position:relative; overflow:hidden;
+}
+.vault-hero::after{
+  content:""; position:absolute; right:-70px; top:-70px; width:260px; height:260px;
+  border:26px solid var(--accent-t); border-radius:50%; opacity:.55;
+}
+.vault-hero .kick{ color:var(--accent); font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700;}
+.vault-hero h2{ font-family:var(--font-display); font-size:clamp(28px,4.4vw,44px); line-height:1.12; margin:8px 0 6px;}
+.vault-hero h2 em{ color:var(--accent); font-style:italic;}
+.vault-hero p{ color:var(--muted); max-width:640px; font-size:15px;}
+.seal{
+  display:inline-flex; align-items:center; gap:8px; margin-top:14px;
+  border:2px dashed var(--seal); color:var(--seal); border-radius:999px;
+  padding:8px 18px; font-weight:700; font-size:13px; letter-spacing:1.5px; text-transform:uppercase;
+  transform:rotate(-2deg);
+}
+.stat{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-s);
+  padding:16px 18px; box-shadow:var(--shadow-s);
+}
+.stat .k{ font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); font-weight:700;}
+.stat .v{ font-family:var(--font-display); font-size:30px; margin:4px 0 2px;}
+.stat .v small{ font-size:15px; color:var(--muted); font-family:var(--font);}
+.stat .d{ font-size:12.5px; color:var(--muted);}
+.ring{ width:118px; height:118px; margin:0 auto;}
+.ring .pct{ font-family:var(--font-display); font-size:26px; fill:var(--text);}
+/* ---------- tables ---------- */
+.table-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-s);}
+table{ width:100%; border-collapse:collapse; font-size:14px; min-width:640px;}
+thead th{
+  text-align:left; font-size:11px; letter-spacing:1.6px; text-transform:uppercase;
+  color:var(--muted); padding:12px 14px; background:var(--surface2);
+  border-bottom:1px solid var(--line2); white-space:nowrap;
+}
+tbody td{ padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top;}
+tbody tr:last-child td{ border-bottom:none;}
+tbody tr:hover td{ background:var(--surface2);}
+td.num, th.num{ text-align:right; font-variant-numeric:tabular-nums;}
+.badge{
+  display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
+  padding:4px 12px; border-radius:999px; border:1.5px solid; white-space:nowrap;
+}
+.b-red{ color:var(--danger); border-color:var(--danger); background:var(--danger-t);}
+.b-green{ color:var(--good); border-color:var(--good); background:var(--good-t);}
+.b-amber{ color:var(--warn); border-color:var(--warn); background:var(--warn-t);}
+.b-copper{ color:var(--accent); border-color:var(--accent); background:var(--accent-t);}
+.b-muted{ color:var(--muted); border-color:var(--line2); background:var(--surface2);}
+/* ---------- forms ---------- */
+.field{ margin-bottom:12px;}
+.field label{ display:block; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:6px;}
+.input, select.input, textarea.input{
+  width:100%; background:var(--bg2); border:1px solid var(--line2); color:var(--text);
+  border-radius:10px; padding:11px 13px; font-size:14.5px; font-family:var(--font);
+}
+.input:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent);}
+textarea.input{ min-height:74px; resize:vertical;}
+.row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+.row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+@media(max-width:700px){ .row2,.row3{grid-template-columns:1fr;} }
+.btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;}
+.btn{
+  background:linear-gradient(135deg, var(--accent), var(--accent-d)); color:#1B1208;
+  border:none; border-radius:12px; padding:12px 22px; font-size:14.5px; font-weight:700;
+  cursor:pointer; font-family:var(--font); box-shadow:var(--shadow-s); transition:transform .12s;
+}
+.btn:hover{ transform:translateY(-1px);}
+.btn.ghost{ background:transparent; color:var(--text); border:1.5px solid var(--line2); box-shadow:none;}
+.btn.danger{ background:transparent; color:var(--danger); border:1.5px solid var(--danger); box-shadow:none;}
+.btn.small{ padding:7px 13px; font-size:13px; border-radius:9px;}
+.iconbtn{ background:var(--surface2); border:1px solid var(--line2); color:var(--muted);
+  border-radius:9px; padding:6px 10px; cursor:pointer; font-size:13px;}
+.iconbtn:hover{ color:var(--danger); border-color:var(--danger);}
+/* ---------- playbooks ---------- */
+.check{ display:flex; gap:12px; align-items:flex-start; padding:11px 12px;
+  border:1px solid var(--line); border-radius:12px; margin-bottom:8px; background:var(--surface2); cursor:pointer;}
+.check input{ width:20px; height:20px; margin-top:2px; accent-color:var(--accent); cursor:pointer; flex:none;}
+.check.done{ opacity:.62;}
+.check.done .ct{ text-decoration:line-through;}
+.check .ct{ font-size:14.5px;}
+.check .cd{ font-size:12.5px; color:var(--muted);}
+.prog{ height:10px; background:var(--bg2); border-radius:99px; overflow:hidden; margin:8px 0 4px; border:1px solid var(--line);}
+.prog i{ display:block; height:100%; background:linear-gradient(90deg, var(--accent), var(--accent-d)); border-radius:99px; transition:width .4s;}
+/* ---------- call-first card ---------- */
+.callfirst{
+  background:var(--paper); color:var(--paper-text); border-radius:var(--radius);
+  padding:26px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+}
+.callfirst::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:10px;
+  background:repeating-linear-gradient(180deg, var(--seal) 0 14px, transparent 14px 24px);}
+.callfirst .kick{ font-size:11px; letter-spacing:3px; text-transform:uppercase; font-weight:800; color:var(--seal);}
+.callfirst h3{ font-family:var(--font-display); font-size:26px; margin:6px 0;}
+.callfirst .who{ font-size:19px; font-weight:700;}
+.callfirst .msg{ background:rgba(0,0,0,.05); border:1px dashed #B9A98C; border-radius:12px;
+  padding:14px 16px; margin-top:12px; font-size:14.5px; white-space:pre-wrap;}
+/* ---------- misc ---------- */
+.empty{ text-align:center; padding:34px 18px; color:var(--muted);}
+.empty .big{ font-size:38px; margin-bottom:8px; opacity:.7;}
+.hint{ font-size:12.5px; color:var(--faint);}
+.kv{ display:grid; grid-template-columns:180px 1fr; gap:8px 14px; font-size:14.5px; margin-top:8px;}
+.kv dt{ color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:1px; font-weight:700; padding-top:3px;}
+.kv dd{ margin:0;}
+.tag{ display:inline-block; background:var(--accent-t); color:var(--accent); border:1px solid var(--accent-line);
+  border-radius:8px; padding:3px 10px; font-size:12px; font-weight:700; margin:2px 4px 2px 0;}
+.toast{
+  position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--text); color:var(--bg); padding:12px 24px; border-radius:999px;
+  font-weight:600; font-size:14px; opacity:0; pointer-events:none; transition:all .3s; z-index:99;
+  box-shadow:var(--shadow);
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(0);}
+@media(max-width:640px){
+  nav#mainNav button{ font-size:12.5px; padding:9px 11px;}
+  .wrap{ padding:0 14px 70px;}
+  .kv{ grid-template-columns:1fr;}
+}
+@media print{
+  header.top .themebox, nav#mainNav, .btnrow, .toast{ display:none !important;}
+  body::before{ display:none;}
+  .view{ display:block !important;}
+  .card{ break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LEDGERLOOPSTUDIO DEMO BAR ===== -->
+<div id="lls-demo-bar" style="position:fixed;top:0;left:0;right:0;z-index:999999;background:#D08A4E;color:#FFFFFF;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;font-weight:600;text-align:center;padding:9px 12px;box-shadow:0 2px 12px rgba(0,0,0,.18);line-height:1.4;">
+  <span style="margin-right:6px;">&#127876;</span> FREE DEMO &mdash; LedgerLoopStudio
+  <span style="opacity:.65;font-weight:400;margin:0 8px;">|</span>
+  <a href="https://www.etsy.com/shop/LedgerLoopStudio" target="_blank" rel="noopener" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:2px;font-weight:700;">Get the full version on Etsy</a>
+  <span style="opacity:.65;font-weight:400;margin-left:8px;">(10 entries max in demo)</span><span id="demo-entry-counter" style="opacity:.85;font-weight:600;margin-left:12px;background:rgba(255,255,255,.2);padding:2px 10px;border-radius:10px;">0/10 entries used</span>
+</div>
+<script>
+(function(){
+  // Push body content below the demo bar so nothing is hidden
+  function padBody(){
+    var bar = document.getElementById('lls-demo-bar');
+    if (bar) document.body.style.paddingTop = bar.offsetHeight + 'px';
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', padBody);
+  else padBody();
+  window.addEventListener('resize', padBody);
+  setTimeout(padBody, 500);
+})();
+</script>
+<!-- ===== /DEMO BAR ===== -->
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="vault">◈</div>
+      <div><b>Business Continuity Binder</b><small>LedgerLoopStudio</small></div>
+    </div>
+    <div class="themebox">
+      <select id="themeSel" aria-label="Theme">
+        <option value="ember">Ember</option>
+        <option value="cream">Cream</option>
+        <option value="copper">Copper</option>
+        <option value="slate">Slate</option>
+        <option value="midnight">Midnight</option>
+      </select>
+      <select id="fontSel" aria-label="Font">
+        <option value="system">System</option>
+        <option value="serif">Serif</option>
+        <option value="mono">Mono</option>
+        <option value="rounded">Rounded</option>
+      </select>
+      <button id="themeToggle" title="Toggle dark / light">◐</button>
+    </div>
+  </header>
+
+  <nav id="mainNav">
+    <button data-view="dashboard" class="active">Dashboard</button>
+    <button data-view="snapshot">Snapshot</button>
+    <button data-view="contacts">Contacts</button>
+    <button data-view="handover">Handover</button>
+    <button data-view="money">Money Map</button>
+    <button data-view="vault">Access Vault</button>
+    <button data-view="playbooks">Playbooks</button>
+    <button data-view="documents">Documents</button>
+    <button data-view="settings">Settings</button>
+  </nav>
+
+  <!-- ================= DASHBOARD ================= -->
+  <section class="view active" id="view-dashboard">
+    <div class="vault-hero">
+      <div class="kick">Small Business Continuity Binder</div>
+      <h2>If you couldn't run your business <em>tomorrow</em>, could anyone else?</h2>
+      <p>This binder is the answer. Keep one trusted person able to pause, transfer, or close your business without guessing — every contact, account, password location, and instruction in one sealed place.</p>
+      <div class="seal" id="readinessSeal">◈ Binder readiness</div>
+    </div>
+    <div class="grid4" style="margin-bottom:18px">
+      <div class="stat">
+        <svg class="ring" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line2)" stroke-width="11"/>
+          <circle id="ringArc" cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="11"
+                  stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)"/>
+          <text x="60" y="70" text-anchor="middle" class="pct" id="ringPct">0%</text>
+        </svg>
+        <div class="k" style="text-align:center; margin-top:6px">Binder readiness</div>
+        <div class="d" style="text-align:center" id="ringSub">seal the gaps below</div>
+      </div>
+      <div class="stat"><div class="k">Key contacts</div><div class="v" id="stContacts">0</div><div class="d">people who matter</div></div>
+      <div class="stat"><div class="k">Open handovers</div><div class="v" id="stHandover">0</div><div class="d">active client work</div></div>
+      <div class="stat"><div class="k">Docs expiring</div><div class="v" id="stDocs">0</div><div class="d">in the next 90 days</div></div>
+    </div>
+    <div class="grid2">
+      <div class="callfirst" id="callFirstCard">
+        <div class="kick">☎ Call first — within 24 hours</div>
+        <h3 id="cfName">No trusted person set</h3>
+        <div class="who" id="cfPhone"></div>
+        <div class="msg" id="cfMsg">Add your trusted person under Snapshot → "Call first".</div>
+      </div>
+      <div class="card">
+        <h3>⚠ Needs attention</h3>
+        <div class="sub">The gaps a stranger would trip over first.</div>
+        <div id="attentionList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SNAPSHOT ================= -->
+  <section class="view" id="view-snapshot">
+    <div class="card">
+      <h3>Business snapshot</h3>
+      <div class="sub">The one-page identity of the business. A stranger should understand what this business <i>is</i> from this card alone.</div>
+      <div class="row2">
+        <div class="field"><label for="sName">Business name</label><input class="input" id="sName" maxlength="80"></div>
+        <div class="field"><label for="sStructure">Structure</label>
+          <select class="input" id="sStructure">
+            <option value="">—</option><option>Sole proprietorship</option><option>LLC</option>
+            <option>Partnership</option><option>S-Corp</option><option>C-Corp</option><option>Other</option>
+          </select></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="sEin">EIN / Tax ID</label><input class="input" id="sEin" maxlength="40" placeholder="stored locally only"></div>
+        <div class="field"><label for="sFormed">Formed</label><input class="input" id="sFormed" maxlength="40" placeholder="e.g. March 2021"></div>
+      </div>
+      <div class="field"><label for="sDocs">Where are formation documents?</label><input class="input" id="sDocs" maxlength="120" placeholder="e.g. Fireproof safe, top drawer"></div>
+      <div class="field"><label for="sWhat">What does this business do? (2–3 lines)</label><textarea class="input" id="sWhat" maxlength="500"></textarea></div>
+      <div class="field"><label for="sNotes">Notes for the trusted person</label><textarea class="input" id="sNotes" maxlength="500"></textarea></div>
+      <div class="btnrow"><button class="btn" id="saveSnapshotBtn">Save snapshot</button></div>
+    </div>
+    <div class="card">
+      <h3>☎ Call-first person</h3>
+      <div class="sub">The single human who gets the first call. Write exactly what they should hear.</div>
+      <div class="row2">
+        <div class="field"><label for="cfNameInput">Name</label><input class="input" id="cfNameInput" maxlength="80"></div>
+        <div class="field"><label for="cfPhoneInput">Phone</label><input class="input" id="cfPhoneInput" maxlength="40"></div>
+      </div>
+      <div class="field"><label for="cfMsgInput">What to tell them (first 24 hours)</label>
+        <textarea class="input" id="cfMsgInput" maxlength="800" placeholder="e.g. 1) Call my accountant Priya first — number is in Contacts. 2) Pause all client work; email template is in Handover. 3) Do NOT close the Stripe account before payouts land."></textarea></div>
+      <div class="btnrow"><button class="btn" id="saveCallFirstBtn">Save call-first card</button></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACTS ================= -->
+  <section class="view" id="view-contacts">
+    <div class="card">
+      <h3>Add a key contact</h3>
+      <div class="sub">Accountant, attorney, banker, insurance, key clients, team. Anyone the business can't run a week without.</div>
+      <div class="row3">
+        <div class="field"><label for="cName">Name</label><input class="input" id="cName" maxlength="80"></div>
+        <div class="field"><label for="cRole">Role</label>
+          <select class="input" id="cRole">
+            <option>Accountant</option><option>Attorney</option><option>Banker</option>
+            <option>Insurance agent</option><option>Key client</option><option>Team / Contractor</option>
+            <option>Landlord</option><option>Supplier</option><option>Other</option>
+          </select></div>
+        <div class="field"><label for="cPhone">Phone</label><input class="input" id="cPhone" maxlength="40"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="cEmail">Email</label><input class="input" id="cEmail" maxlength="80"></div>
+        <div class="field"><label for="cNotes">Notes</label><input class="input" id="cNotes" maxlength="140" placeholder="e.g. Handles payroll + quarterly taxes"></div>
+      </div>
+      <div class="btnrow"><button class="btn" id="addContactBtn">Add contact</button></div>
+    </div>
+    <div class="card"><h3>Key contacts</h3><div class="sub">The people who keep the lights on.</div>
+      <div class="table-wrap"><table id="contactTable">
+        <thead><tr><th>Name</th><th>Role</th><th>Phone</th><th>Email</th><th>Notes</th><th></th></tr></thead>
+        <tbody id="contactTbody"></tbody></table></div>
+      <div class="empty" id="contactEmpty"><div class="big">◈</div><b>No key contacts yet</b>Add the accountant, attorney, and banker first.</div>
+    </div>
+  </section>
+
+  <!-- ================= HANDOVER ================= -->
+  <section class="view" id="view-handover">
+    <div class="card">
+      <h3>Log active work</h3>
+      <div class="sub">Every open client engagement, so a trusted person can pick it up mid-stream without calling you.</div>
+      <div class="row3">
+        <div class="field"><label for="hClient">Client</label><input class="input" id="hClient" maxlength="80"></div>
+        <div class="field"><label for="hProject">Project / engagement</label><input class="input" id="hProject" maxlength="80"></div>
+        <div class="field"><label for="hStatus">Status</label>
+          <select class="input" id="hStatus"><option>In progress</option><option>Waiting on client</option><option>On hold</option><option>Due this week</option></select></div>
+      </div>
+      <div class="row3">
+        <div class="field"><label for="hNext">Next action</label><input class="input" id="hNext" maxlength="140" placeholder="e.g. Send revised mockups by Friday"></div>
+        <div class="field"><label for="hDeadline">Deadline</label><input class="input" id="hDeadline" type="date"></div>
+        <div class="field"><label for="hContact">Client contact</label><input class="input" id="hContact" maxlength="80" placeholder="name + phone/email"></div>
+      </div>
+      <div class="btnrow"><button class="btn" id="addHandoverBtn">Add handover item</button></div>
+    </div>
+    <div class="card"><h3>Handover board</h3><div class="sub">What to do, for whom, by when.</div>
+      <div class="table-wrap"><table id="handoverTable">
+        <thead><tr><th>Client</th><th>Project</th><th>Status</th><th>Next action</th><th>Deadline</th><th>Contact</th><th></th></tr></thead>
+        <tbody id="handoverTbody"></tbody></table></div>
+      <div class="empty" id="handoverEmpty"><div class="big">◈</div><b>No active work logged</b>Add every open engagement.</div>
+    </div>
+  </section>
+
+  <!-- ================= MONEY MAP ================= -->
+  <section class="view" id="view-money">
+    <div class="grid2">
+      <div class="card">
+        <h3>Bank accounts</h3><div class="sub">Where the business money sits.</div>
+        <div class="row2">
+          <div class="field"><label for="aName">Account</label><input class="input" id="aName" maxlength="60" placeholder="e.g. Chase Business Checking"></div>
+          <div class="field"><label for="aBal">Balance</label><input class="input" id="aBal" inputmode="decimal" placeholder="12,400"></div>
+        </div>
+        <div class="field"><label for="aNotes">Notes</label><input class="input" id="aNotes" maxlength="120" placeholder="e.g. Payroll runs from here"></div>
+        <div class="btnrow"><button class="btn small" id="addAccountBtn">Add account</button></div>
+        <div id="accountList" style="margin-top:12px"></div>
+      </div>
+      <div class="card">
+        <h3>Payment processors</h3><div class="sub">Stripe, PayPal, etc. — and what to do before touching them.</div>
+        <div class="row2">
+          <div class="field"><label for="pName">Processor</label><input class="input" id="pName" maxlength="60" placeholder="e.g. Stripe"></div>
+          <div class="field"><label for="pBal">Pending payout</label><input class="input" id="pBal" inputmode="decimal" placeholder="1,820"></div>
+        </div>
+        <div class="field"><label for="pNotes">Instruction</label><input class="input" id="pNotes" maxlength="140" placeholder="e.g. Do NOT close before payouts land"></div>
+        <div class="btnrow"><button class="btn small" id="addProcessorBtn">Add processor</button></div>
+        <div id="processorList" style="margin-top:12px"></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Invoices owed <span class="hint">to you</span></h3><div class="sub">Money clients still owe the business.</div>
+        <div class="row3">
+          <div class="field"><label for="iClient">Client</label><input class="input" id="iClient" maxlength="60"></div>
+          <div class="field"><label for="iAmt">Amount</label><input class="input" id="iAmt" inputmode="decimal"></div>
+          <div class="field"><label for="iDue">Due</label><input class="input" id="iDue" type="date"></div>
+        </div>
+        <div class="btnrow"><button class="btn small" id="addInvoiceBtn">Add invoice</button></div>
+        <div id="invoiceList" style="margin-top:12px"></div>
+      </div>
+      <div class="card">
+        <h3>Business debts</h3><div class="sub">What the business owes.</div>
+        <div class="row3">
+          <div class="field"><label for="dName">Debt</label><input class="input" id="dName" maxlength="60" placeholder="e.g. Amex Business"></div>
+          <div class="field"><label for="dBal">Balance</label><input class="input" id="dBal" inputmode="decimal"></div>
+          <div class="field"><label for="dPay">Min. payment</label><input class="input" id="dPay" inputmode="decimal"></div>
+        </div>
+        <div class="btnrow"><button class="btn small" id="addDebtBtn">Add debt</button></div>
+        <div id="debtList" style="margin-top:12px"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Recurring business bills</h3><div class="sub">What keeps charging the business every month — cancel or keep, but never by surprise.</div>
+      <div class="row3">
+        <div class="field"><label for="bName">Bill</label><input class="input" id="bName" maxlength="60" placeholder="e.g. Adobe CC"></div>
+        <div class="field"><label for="bAmt">Amount</label><input class="input" id="bAmt" inputmode="decimal"></div>
+        <div class="field"><label for="bDue">Next due</label><input class="input" id="bDue" type="date"></div>
+      </div>
+      <div class="field"><label for="bNotes">Notes</label><input class="input" id="bNotes" maxlength="140" placeholder="e.g. Needed for client work — keep"></div>
+      <div class="btnrow"><button class="btn small" id="addBillBtn">Add bill</button></div>
+      <div id="billList" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <!-- ================= ACCESS VAULT ================= -->
+  <section class="view" id="view-vault">
+    <div class="card">
+      <h3>Where the keys live</h3>
+      <div class="sub"><b>Never store raw passwords here.</b> Record <i>where</i> each credential lives and <i>how</i> your trusted person gets in (e.g. "1Password → Emergency Kit in the fireproof safe").</div>
+      <div class="row3">
+        <div class="field"><label for="vService">Service / account</label><input class="input" id="vService" maxlength="80" placeholder="e.g. Business bank login"></div>
+        <div class="field"><label for="vWhere">Where the credential lives</label><input class="input" id="vWhere" maxlength="120" placeholder="e.g. 1Password vault 'Business'"></div>
+        <div class="field"><label for="vHow">How the trusted person gets in</label><input class="input" id="vHow" maxlength="140" placeholder="e.g. Emergency Kit in fireproof safe"></div>
+      </div>
+      <div class="field"><label for="vNotes">Notes</label><input class="input" id="vNotes" maxlength="140" placeholder="e.g. 2FA goes to the business phone"></div>
+      <div class="btnrow"><button class="btn" id="addVaultBtn">Add vault entry</button></div>
+    </div>
+    <div class="card"><h3>Access vault</h3><div class="sub">Locations, not passwords.</div>
+      <div class="table-wrap"><table id="vaultTable">
+        <thead><tr><th>Service</th><th>Credential lives in</th><th>Trusted person access</th><th>Notes</th><th></th></tr></thead>
+        <tbody id="vaultTbody"></tbody></table></div>
+      <div class="empty" id="vaultEmpty"><div class="big">◈</div><b>Vault is empty</b>Map every critical login's location.</div>
+    </div>
+  </section>
+
+  <!-- ================= PLAYBOOKS ================= -->
+  <section class="view" id="view-playbooks">
+    <div class="card">
+      <h3>Continuity playbooks</h3>
+      <div class="sub">Three sealed envelopes: pause the business, transfer it, or close it cleanly. Tick steps as they're prepared — not when disaster strikes.</div>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>❚❚ Pause</h3><div class="sub">Mothball it safely.</div><div class="prog"><i id="progPause"></i></div><div id="pbPause"></div></div>
+      <div class="card"><h3>⇄ Transfer</h3><div class="sub">Hand it to someone else.</div><div class="prog"><i id="progTransfer"></i></div><div id="pbTransfer"></div></div>
+      <div class="card"><h3>✕ Close</h3><div class="sub">Wind it down cleanly.</div><div class="prog"><i id="progClose"></i></div><div id="pbClose"></div></div>
+    </div>
+    <div class="card">
+      <h3>Add your own step</h3>
+      <div class="row3">
+        <div class="field"><label for="pbWhich">Playbook</label><select class="input" id="pbWhich"><option value="pause">Pause</option><option value="transfer">Transfer</option><option value="close">Close</option></select></div>
+        <div class="field"><label for="pbText">Step</label><input class="input" id="pbText" maxlength="140"></div>
+        <div class="field"><label for="pbDetail">Detail</label><input class="input" id="pbDetail" maxlength="140"></div>
+      </div>
+      <div class="btnrow"><button class="btn small" id="addPbBtn">Add step</button></div>
+    </div>
+  </section>
+
+  <!-- ================= DOCUMENTS ================= -->
+  <section class="view" id="view-documents">
+    <div class="card">
+      <h3>Track a document</h3>
+      <div class="sub">Licenses, contracts, leases, insurance — with expiry dates so nothing lapses silently.</div>
+      <div class="row3">
+        <div class="field"><label for="docName">Document</label><input class="input" id="docName" maxlength="80" placeholder="e.g. Business license"></div>
+        <div class="field"><label for="docType">Type</label>
+          <select class="input" id="docType"><option>License</option><option>Contract</option><option>Lease</option><option>Insurance policy</option><option>Tax filing</option><option>Other</option></select></div>
+        <div class="field"><label for="docExp">Expires / renews</label><input class="input" id="docExp" type="date"></div>
+      </div>
+      <div class="field"><label for="docLoc">Where is it kept?</label><input class="input" id="docLoc" maxlength="120" placeholder="e.g. Filing cabinet, folder 'Legal'"></div>
+      <div class="btnrow"><button class="btn" id="addDocBtn">Add document</button></div>
+    </div>
+    <div class="card"><h3>Document register</h3><div class="sub">Sorted by urgency.</div>
+      <div class="table-wrap"><table id="docTable">
+        <thead><tr><th>Document</th><th>Type</th><th>Expires</th><th>Status</th><th>Location</th><th></th></tr></thead>
+        <tbody id="docTbody"></tbody></table></div>
+      <div class="empty" id="docEmpty"><div class="big">◈</div><b>No documents tracked</b>Start with the business license and insurance.</div>
+    </div>
+  </section>
+
+  <!-- ================= SETTINGS ================= -->
+  <section class="view" id="view-settings">
+    <div class="grid2">
+      <div class="card">
+        <h3>Data</h3><div class="sub">Everything stays on this device. Back up before you need it.</div>
+        <div class="btnrow">
+          <button class="btn ghost" id="loadSampleBtn">Load sample business</button>
+          <button class="btn ghost" id="exportJsonBtn">Backup (JSON)</button>
+          <button class="btn ghost" id="importJsonBtn">Restore</button>
+          <input type="file" id="importFile" accept=".json" style="display:none">
+          <button class="btn ghost" id="exportCsvBtn">Export contacts (CSV)</button>
+          <button class="btn danger" id="wipeBtn">Erase all</button>
+        </div>
+        <p class="hint" style="margin-top:12px">Sample data: "Harbor &amp; Pine Studio" — a fictional 2-person design studio, so every view has something to explore. Replace it with your own.</p>
+      </div>
+      <div class="card">
+        <h3>Print binder</h3><div class="sub">A paper copy in a fireproof safe is the ultimate backup.</div>
+        <div class="btnrow"><button class="btn ghost" id="printBtn">Print / Save PDF</button></div>
+        <p class="hint" style="margin-top:12px">Print view expands every section onto clean pages.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>About</h3>
+      <div class="sub">Business Continuity Binder by LedgerLoopStudio · v1.0 · Offline single-file app. Your data never leaves this device. Informational tool only — not legal, tax, or financial advice.</div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+"use strict";
+/* ================= STORAGE ================= */
+const KEY = "bcb_v1";
+const uid = () => "id" + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+function blank(){ return {
+  snapshot:{name:"",structure:"",ein:"",formed:"",docs:"",what:"",notes:""},
+  callfirst:{name:"",phone:"",msg:""},
+  contacts:[], handover:[],
+  money:{accounts:[],processors:[],invoices:[],debts:[],bills:[]},
+  vault:[], playbooks:{pause:[],transfer:[],close:[]}, documents:[],
+  settings:{theme:"ember",font:"system"}
+};}
+let S = blank();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function load(){
+  try{ const raw = localStorage.getItem(KEY); if(raw){ const p = JSON.parse(raw); const b = blank(); S = Object.assign(b, p); S.money = Object.assign(b.money, p.money||{}); S.playbooks = Object.assign(b.playbooks, p.playbooks||{}); S.settings = Object.assign(b.settings, p.settings||{});} }catch(e){}
+  applyTheme();
+}
+function applyTheme(){
+  document.documentElement.dataset.theme = S.settings.theme || "ember";
+  document.documentElement.dataset.font = S.settings.font || "system";
+  const ts = document.getElementById("themeSel"); if(ts) ts.value = S.settings.theme;
+  const fs = document.getElementById("fontSel"); if(fs) fs.value = S.settings.font;
+}
+/* ================= HELPERS ================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => { const v = parseFloat(String(n).replace(/[^0-9.\-]/g,"")); if(isNaN(v)) return "—"; return "$" + v.toLocaleString("en-US",{maximumFractionDigits:2, minimumFractionDigits:(v%1?2:0)}); };
+function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2200); }
+function daysUntil(dstr){
+  if(!dstr) return null;
+  const t = new Date(); t.setHours(0,0,0,0);
+  const d = new Date(dstr+"T00:00:00");
+  return Math.round((d - t)/86400000);
+}
+function docBadge(dstr){
+  const d = daysUntil(dstr);
+  if(d==null) return '<span class="badge b-muted">no date</span>';
+  if(d<0) return '<span class="badge b-red">expired</span>';
+  if(d<=30) return '<span class="badge b-red">'+d+'d left</span>';
+  if(d<=90) return '<span class="badge b-amber">'+d+'d left</span>';
+  return '<span class="badge b-green">ok</span>';
+}
+function delBtn(fn, id){ return '<button class="iconbtn" data-del="'+fn+'" data-id="'+id+'" title="Delete">✕</button>'; }
+/* ================= NAV ================= */
+document.querySelectorAll("#mainNav button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    document.querySelectorAll("#mainNav button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+    $("view-"+b.dataset.view).classList.add("active");
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+});
+/* ================= SAMPLE DATA ================= */
+function sampleData(){
+  S = blank();
+  S.snapshot = {name:"Harbor & Pine Studio", structure:"LLC", ein:"12-3456789", formed:"March 2021",
+    docs:"Fireproof safe, top drawer — blue folder", what:"Boutique brand + web design studio. 2 people, ~14 retainer clients, project work for agencies.",
+    notes:"Maya runs client work; Jordan runs ops. If both unreachable, Priya (accountant) can pause payroll."};
+  S.callfirst = {name:"Jordan Ellis", phone:"(555) 014-8890",
+    msg:"1) Call Priya (accountant) first — number is in Contacts.\n2) Pause all client work; use the Handover board for who owes what.\n3) Do NOT close the Stripe account before payouts land.\n4) Payroll runs on the 1st from Chase Business Checking."};
+  S.contacts = [
+    {id:uid(), name:"Priya Nair", role:"Accountant", phone:"(555) 201-4455", email:"priya@naircpa.com", notes:"Payroll + quarterly taxes"},
+    {id:uid(), name:"Daniel Okafor", role:"Attorney", phone:"(555) 332-7788", email:"d.okafor@okaforlaw.com", notes:"Contracts, LLC filings"},
+    {id:uid(), name:"First Community Bank", role:"Banker", phone:"(555) 900-1122", email:"", notes:"Business checking + line of credit"},
+    {id:uid(), name:"Lena Marsh", role:"Key client", phone:"(555) 418-2030", email:"lena@marshandco.com", notes:"$4k/mo retainer — biggest account"},
+    {id:uid(), name:"Theo Alvarez", role:"Team / Contractor", phone:"(555) 677-9041", email:"theo@alvarez.dev", notes:"Dev contractor, knows the codebase"}
+  ];
+  const d1 = new Date(Date.now()+4*864e5).toISOString().slice(0,10);
+  const d2 = new Date(Date.now()+11*864e5).toISOString().slice(0,10);
+  S.handover = [
+    {id:uid(), client:"Marsh & Co.", project:"Website redesign", status:"In progress", next:"Send revised homepage mockups", deadline:d1, contact:"Lena Marsh · (555) 418-2030"},
+    {id:uid(), client:"Bluefin Logistics", project:"Brand refresh", status:"Waiting on client", next:"Waiting: logo approval", deadline:d2, contact:"sam@bluefin.co"},
+    {id:uid(), client:"Copperline Coffee", project:"Packaging design", status:"Due this week", next:"Deliver final print files", deadline:d1, contact:"ana@copperline.coffee"}
+  ];
+  S.money.accounts = [
+    {id:uid(), name:"Chase Business Checking", bal:"12400", notes:"Payroll + bills run from here"},
+    {id:uid(), name:"Ally Business Savings", bal:"30000", notes:"Tax reserve — do not touch"}
+  ];
+  S.money.processors = [{id:uid(), name:"Stripe", bal:"1820", notes:"Do NOT close before payouts land"}];
+  S.money.invoices = [{id:uid(), client:"Marsh & Co.", amt:"4000", due:d2, status:"Sent"}];
+  S.money.debts = [{id:uid(), name:"Amex Business", bal:"2350", pay:"120"}];
+  S.money.bills = [
+    {id:uid(), name:"Adobe Creative Cloud", amt:"59.99", due:d1, notes:"Needed for client work — keep"},
+    {id:uid(), name:"Webflow hosting", amt:"23", due:d2, notes:"Client sites — keep"}
+  ];
+  S.vault = [
+    {id:uid(), service:"Business bank login", where:"1Password vault 'Business'", how:"Emergency Kit in fireproof safe", notes:"2FA goes to the business phone"},
+    {id:uid(), service:"Stripe dashboard", where:"1Password vault 'Business'", how:"Emergency Kit in fireproof safe", notes:""},
+    {id:uid(), service:"Domain registrar", where:"1Password vault 'Business'", how:"Emergency Kit in fireproof safe", notes:"Auto-renew is ON"}
+  ];
+  const pb = (t, det) => ({id:uid(), text:t, detail:det||"", done:false});
+  S.playbooks.pause = [
+    pb("Email every active client: work is paused 30 days", "Template draft lives in the Handover notes"),
+    pb("Pause payroll with Priya — do not run a final cycle yet", ""),
+    pb("Downgrade (don't cancel) software to free tiers", "Adobe, Webflow, Slack"),
+    pb("Set email auto-reply + voicemail explaining the pause", "")
+  ];
+  S.playbooks.transfer = [
+    pb("Introduce the successor to the top 5 clients by email", "Use the Key contacts list"),
+    pb("Transfer domain + hosting access", "Registrar + Webflow — see Access vault"),
+    pb("Hand over the Handover board — walk through each item", ""),
+    pb("Update the bank's authorized signers", "Needs attorney + new operating agreement")
+  ];
+  S.playbooks.close = [
+    pb("Collect every outstanding invoice first", "See Money map → Invoices owed"),
+    pb("Pay final payroll + contractor invoices", "Priya handles filings"),
+    pb("Cancel software, leases, and insurance in writing", "Keep cancellation confirmations"),
+    pb("File final tax returns + dissolve the LLC", "Attorney: Daniel Okafor")
+  ];
+  const e1 = new Date(Date.now()+20*864e5).toISOString().slice(0,10);
+  const e2 = new Date(Date.now()+200*864e5).toISOString().slice(0,10);
+  S.documents = [
+    {id:uid(), name:"Business license — City of Portland", type:"License", exp:e1, loc:"Filing cabinet, folder 'Legal'"},
+    {id:uid(), name:"Office lease", type:"Lease", exp:e2, loc:"Filing cabinet, folder 'Lease'"},
+    {id:uid(), name:"General liability insurance", type:"Insurance policy", exp:e1, loc:"Email from broker + paper copy in safe"}
+  ];
+  save(); renderAll(); toast("Sample business loaded — Harbor & Pine Studio");
+}
+/* ================= RENDER ================= */
+function renderAll(){
+  renderDashboard(); renderSnapshot(); renderContacts(); renderHandover(); renderMoney();
+  renderVault(); renderPlaybooks(); renderDocs();
+}
+function readiness(){
+  const checks = [
+    !!S.snapshot.name, S.contacts.length>0, S.handover.length>0,
+    !!S.callfirst.name, S.vault.length>0, S.documents.length>0,
+    S.money.accounts.length>0, S.playbooks.pause.length+S.playbooks.transfer.length+S.playbooks.close.length>0
+  ];
+  const done = checks.filter(Boolean).length;
+  return {pct: Math.round(done/checks.length*100), done, total: checks.length};
+}
+function renderDashboard(){
+  const r = readiness();
+  $("ringArc").style.strokeDashoffset = (326.7 * (1 - r.pct/100)).toFixed(1);
+  $("ringPct").textContent = r.pct + "%";
+  $("ringSub").textContent = r.done + " of " + r.total + " sealed";
+  $("readinessSeal").textContent = r.pct===100 ? "◈ Binder sealed — ready" : "◈ Binder readiness — " + r.pct + "%";
+  $("stContacts").textContent = S.contacts.length;
+  $("stHandover").textContent = S.handover.length;
+  const soon = S.documents.filter(d=>{ const x=daysUntil(d.exp); return x!=null && x<=90; }).length;
+  $("stDocs").innerHTML = soon + (soon? ' <small>⚠</small>' : '');
+  $("cfName").textContent = S.callfirst.name || "No trusted person set";
+  $("cfPhone").textContent = S.callfirst.phone || "";
+  $("cfMsg").textContent = S.callfirst.msg || 'Add your trusted person under Snapshot → "Call first".';
+  const att = [];
+  if(!S.snapshot.name) att.push("Business snapshot is empty — a stranger wouldn't know what this business is.");
+  if(!S.callfirst.name) att.push("No call-first person set — the most important card in the binder.");
+  if(S.contacts.length===0) att.push("No key contacts — add accountant, attorney, banker first.");
+  if(S.vault.length===0) att.push("Access vault is empty — map where every credential lives.");
+  const expSoon = S.documents.filter(d=>{ const x=daysUntil(d.exp); return x!=null && x<0; });
+  if(expSoon.length) att.push(expSoon.length + " document(s) expired: " + expSoon.map(d=>esc(d.name)).join(", "));
+  const exp30 = S.documents.filter(d=>{ const x=daysUntil(d.exp); return x!=null && x>=0 && x<=30; });
+  if(exp30.length) att.push(exp30.length + " document(s) expire within 30 days.");
+  $("attentionList").innerHTML = att.length
+    ? att.map(a=>'<div class="check"><span>⚠</span><span class="ct">'+a+'</span></div>').join("")
+    : '<div class="empty"><div class="big">◈</div><b>All sealed.</b>Nothing urgent right now.</div>';
+}
+function renderSnapshot(){
+  $("sName").value = S.snapshot.name||""; $("sStructure").value = S.snapshot.structure||"";
+  $("sEin").value = S.snapshot.ein||""; $("sFormed").value = S.snapshot.formed||"";
+  $("sDocs").value = S.snapshot.docs||""; $("sWhat").value = S.snapshot.what||"";
+  $("sNotes").value = S.snapshot.notes||"";
+  $("cfNameInput").value = S.callfirst.name||""; $("cfPhoneInput").value = S.callfirst.phone||"";
+  $("cfMsgInput").value = S.callfirst.msg||"";
+}
+/* ---- contacts ---- */
+const ROLE_BADGE = {"Accountant":"b-copper","Attorney":"b-copper","Banker":"b-copper","Insurance agent":"b-amber","Key client":"b-green","Team / Contractor":"b-muted","Landlord":"b-muted","Supplier":"b-muted","Other":"b-muted"};
+function renderContacts(){
+  const tb = $("contactTbody");
+  tb.innerHTML = S.contacts.map(c=>"<tr><td><b>"+esc(c.name)+"</b></td><td><span class='badge "+(ROLE_BADGE[c.role]||"b-muted")+"'>"+esc(c.role)+"</span></td><td>"+esc(c.phone)+"</td><td>"+esc(c.email)+"</td><td>"+esc(c.notes)+"</td><td>"+delBtn("contact",c.id)+"</td></tr>").join("");
+  $("contactEmpty").style.display = S.contacts.length? "none":"block";
+}
+function renderHandover(){
+  const tb = $("handoverTbody");
+  const SB = {"In progress":"b-copper","Waiting on client":"b-amber","On hold":"b-muted","Due this week":"b-red"};
+  tb.innerHTML = S.handover.map(h=>"<tr><td><b>"+esc(h.client)+"</b></td><td>"+esc(h.project)+"</td><td><span class='badge "+(SB[h.status]||"b-muted")+"'>"+esc(h.status)+"</span></td><td>"+esc(h.next)+"</td><td>"+esc(h.deadline||"—")+"</td><td>"+esc(h.contact)+"</td><td>"+delBtn("handover",h.id)+"</td></tr>").join("");
+  $("handoverEmpty").style.display = S.handover.length? "none":"block";
+}
+/* ---- money ---- */
+function moneyRow(list, fields, amtPrefix){
+  const pre = amtPrefix || "";
+  return list.map(x=>'<div class="check"><div style="flex:1"><div class="ct"><b>'+esc(x[fields[0]])+'</b>'+(x[fields[1]]?' — <span class="tag">'+pre+money(x[fields[1]])+'</span>':"")+'</div>'+(x[fields[2]]?'<div class="cd">'+esc(x[fields[2]])+'</div>':"")+'</div>'+delBtn(fields[3],x.id)+'</div>').join("")
+    || '<div class="empty"><div class="big">◈</div><b>Nothing here yet</b></div>';
+}
+function renderMoney(){
+  $("accountList").innerHTML = moneyRow(S.money.accounts, ["name","bal","notes","account"]);
+  $("processorList").innerHTML = moneyRow(S.money.processors, ["name","bal","notes","processor"]);
+  $("invoiceList").innerHTML = S.money.invoices.map(x=>'<div class="check"><div style="flex:1"><div class="ct"><b>'+esc(x.client)+'</b> — <span class="tag">'+money(x.amt)+'</span></div><div class="cd">Due: '+esc(x.due||"—")+' · '+esc(x.status||"Sent")+'</div></div>'+delBtn("invoice",x.id)+'</div>').join("")
+    || '<div class="empty"><div class="big">◈</div><b>Nothing here yet</b></div>';
+  $("debtList").innerHTML = moneyRow(S.money.debts, ["name","bal","notes","debt"]);
+  $("billList").innerHTML = moneyRow(S.money.bills, ["name","amt","notes","bill"]);
+}
+/* ---- vault ---- */
+function renderVault(){
+  const tb = $("vaultTbody");
+  tb.innerHTML = S.vault.map(v=>"<tr><td><b>"+esc(v.service)+"</b></td><td>"+esc(v.where)+"</td><td>"+esc(v.how)+"</td><td>"+esc(v.notes)+"</td><td>"+delBtn("vault",v.id)+"</td></tr>").join("");
+  $("vaultEmpty").style.display = S.vault.length? "none":"block";
+}
+/* ---- playbooks ---- */
+function renderPlaybooks(){
+  [["pause","pbPause","progPause"],["transfer","pbTransfer","progTransfer"],["close","pbClose","progClose"]].forEach(([k, el, pr])=>{
+    const list = S.playbooks[k];
+    $(el).innerHTML = list.map(p=>'<label class="check'+(p.done?" done":"")+'"><input type="checkbox" data-pb="'+k+'" data-id="'+p.id+'"'+(p.done?" checked":"")+'> <span><span class="ct">'+esc(p.text)+'</span>'+(p.detail?'<div class="cd">'+esc(p.detail)+'</div>':"")+'</span><span style="margin-left:auto">'+delBtn("pb",k+":"+p.id)+'</span></label>').join("")
+      || '<div class="empty"><b>No steps yet</b></div>';
+    const done = list.filter(p=>p.done).length;
+    $(pr).style.width = list.length? (done/list.length*100)+"%" : "0%";
+  });
+}
+/* ---- documents ---- */
+function renderDocs(){
+  const tb = $("docTbody");
+  const sorted = [...S.documents].sort((a,b)=> (daysUntil(a.exp)??9999) - (daysUntil(b.exp)??9999));
+  tb.innerHTML = sorted.map(d=>"<tr><td><b>"+esc(d.name)+"</b></td><td>"+esc(d.type)+"</td><td>"+esc(d.exp||"—")+"</td><td>"+docBadge(d.exp)+"</td><td>"+esc(d.loc)+"</td><td>"+delBtn("doc",d.id)+"</td></tr>").join("");
+  $("docEmpty").style.display = S.documents.length? "none":"block";
+}
+/* ================= ACTIONS ================= */
+document.addEventListener("click", e=>{
+  const del = e.target.closest("[data-del]");
+  if(del){
+    e.preventDefault(); e.stopPropagation();
+    const [fn, id] = [del.dataset.del, del.dataset.id];
+    if(fn==="contact") S.contacts = S.contacts.filter(x=>x.id!==id);
+    if(fn==="handover") S.handover = S.handover.filter(x=>x.id!==id);
+    if(fn==="vault") S.vault = S.vault.filter(x=>x.id!==id);
+    if(fn==="doc") S.documents = S.documents.filter(x=>x.id!==id);
+    if(fn==="account") S.money.accounts = S.money.accounts.filter(x=>x.id!==id);
+    if(fn==="processor") S.money.processors = S.money.processors.filter(x=>x.id!==id);
+    if(fn==="invoice") S.money.invoices = S.money.invoices.filter(x=>x.id!==id);
+    if(fn==="debt") S.money.debts = S.money.debts.filter(x=>x.id!==id);
+    if(fn==="bill") S.money.bills = S.money.bills.filter(x=>x.id!==id);
+    if(fn==="pb"){ const [k, pid] = id.split(":"); S.playbooks[k] = S.playbooks[k].filter(x=>x.id!==pid); }
+    save(); renderAll(); return;
+  }
+  const pbx = e.target.closest("[data-pb]");
+  if(pbx){
+    const item = S.playbooks[pbx.dataset.pb].find(x=>x.id===pbx.dataset.id);
+    if(item){ item.done = pbx.checked; save(); renderPlaybooks(); renderDashboard(); }
+  }
+});
+$("saveSnapshotBtn").addEventListener("click", ()=>{
+  S.snapshot = {name:$("sName").value.trim(), structure:$("sStructure").value, ein:$("sEin").value.trim(),
+    formed:$("sFormed").value.trim(), docs:$("sDocs").value.trim(), what:$("sWhat").value.trim(), notes:$("sNotes").value.trim()};
+  save(); renderDashboard(); toast("Snapshot saved");
+});
+$("saveCallFirstBtn").addEventListener("click", ()=>{
+  S.callfirst = {name:$("cfNameInput").value.trim(), phone:$("cfPhoneInput").value.trim(), msg:$("cfMsgInput").value.trim()};
+  save(); renderDashboard(); toast("Call-first card saved");
+});
+$("addContactBtn").addEventListener("click", ()=>{
+  const name = $("cName").value.trim(); if(!name){ toast("Add a name first"); return; }
+  S.contacts.push({id:uid(), name, role:$("cRole").value, phone:$("cPhone").value.trim(), email:$("cEmail").value.trim(), notes:$("cNotes").value.trim()});
+  ["cName","cPhone","cEmail","cNotes"].forEach(i=>$(i).value="");
+  save(); renderContacts(); renderDashboard(); toast("Contact added");
+});
+$("addHandoverBtn").addEventListener("click", ()=>{
+  const client = $("hClient").value.trim(); if(!client){ toast("Add a client first"); return; }
+  S.handover.push({id:uid(), client, project:$("hProject").value.trim(), status:$("hStatus").value,
+    next:$("hNext").value.trim(), deadline:$("hDeadline").value, contact:$("hContact").value.trim()});
+  ["hClient","hProject","hNext","hDeadline","hContact"].forEach(i=>$(i).value="");
+  save(); renderHandover(); renderDashboard(); toast("Handover item added");
+});
+$("addAccountBtn").addEventListener("click", ()=>{
+  const name = $("aName").value.trim(); if(!name){ toast("Add an account name"); return; }
+  S.money.accounts.push({id:uid(), name, bal:$("aBal").value.trim(), notes:$("aNotes").value.trim()});
+  ["aName","aBal","aNotes"].forEach(i=>$(i).value=""); save(); renderMoney(); renderDashboard(); toast("Account added");
+});
+$("addProcessorBtn").addEventListener("click", ()=>{
+  const name = $("pName").value.trim(); if(!name){ toast("Add a processor name"); return; }
+  S.money.processors.push({id:uid(), name, bal:$("pBal").value.trim(), notes:$("pNotes").value.trim()});
+  ["pName","pBal","pNotes"].forEach(i=>$(i).value=""); save(); renderMoney(); renderDashboard(); toast("Processor added");
+});
+$("addInvoiceBtn").addEventListener("click", ()=>{
+  const client = $("iClient").value.trim(); if(!client){ toast("Add a client"); return; }
+  S.money.invoices.push({id:uid(), client, amt:$("iAmt").value.trim(), due:$("iDue").value, status:"Sent"});
+  ["iClient","iAmt","iDue"].forEach(i=>$(i).value=""); save(); renderMoney(); toast("Invoice added");
+});
+$("addDebtBtn").addEventListener("click", ()=>{
+  const name = $("dName").value.trim(); if(!name){ toast("Add a debt name"); return; }
+  S.money.debts.push({id:uid(), name, bal:$("dBal").value.trim(), pay:$("dPay").value.trim()});
+  ["dName","dBal","dPay"].forEach(i=>$(i).value=""); save(); renderMoney(); toast("Debt added");
+});
+$("addBillBtn").addEventListener("click", ()=>{
+  const name = $("bName").value.trim(); if(!name){ toast("Add a bill name"); return; }
+  S.money.bills.push({id:uid(), name, amt:$("bAmt").value.trim(), due:$("bDue").value, notes:$("bNotes").value.trim()});
+  ["bName","bAmt","bDue","bNotes"].forEach(i=>$(i).value=""); save(); renderMoney(); toast("Bill added");
+});
+$("addVaultBtn").addEventListener("click", ()=>{
+  const service = $("vService").value.trim(); if(!service){ toast("Add a service name"); return; }
+  S.vault.push({id:uid(), service, where:$("vWhere").value.trim(), how:$("vHow").value.trim(), notes:$("vNotes").value.trim()});
+  ["vService","vWhere","vHow","vNotes"].forEach(i=>$(i).value="");
+  save(); renderVault(); renderDashboard(); toast("Vault entry added");
+});
+$("addPbBtn").addEventListener("click", ()=>{
+  const text = $("pbText").value.trim(); if(!text){ toast("Add a step"); return; }
+  S.playbooks[$("pbWhich").value].push({id:uid(), text, detail:$("pbDetail").value.trim(), done:false});
+  $("pbText").value=""; $("pbDetail").value=""; save(); renderPlaybooks(); renderDashboard(); toast("Step added");
+});
+$("addDocBtn").addEventListener("click", ()=>{
+  const name = $("docName").value.trim(); if(!name){ toast("Add a document name"); return; }
+  S.documents.push({id:uid(), name, type:$("docType").value, exp:$("docExp").value, loc:$("docLoc").value.trim()});
+  ["docName","docExp","docLoc"].forEach(i=>$(i).value="");
+  save(); renderDocs(); renderDashboard(); toast("Document added");
+});
+/* ---- theme/font ---- */
+$("themeSel").addEventListener("change", e=>{ S.settings.theme=e.target.value; save(); applyTheme(); });
+$("fontSel").addEventListener("change", e=>{ S.settings.font=e.target.value; save(); applyTheme(); });
+$("themeToggle").addEventListener("click", ()=>{
+  const darks = ["ember","copper","slate","midnight"];
+  S.settings.theme = darks.includes(S.settings.theme) ? "cream" : "ember";
+  save(); applyTheme(); toast(S.settings.theme==="cream" ? "Light mode" : "Dark mode");
+});
+/* ---- data tools ---- */
+$("loadSampleBtn").addEventListener("click", ()=>{ if(confirm("Load the sample business? This replaces current data.")) sampleData(); });
+$("exportJsonBtn").addEventListener("click", ()=>{
+  const blob = new Blob([JSON.stringify(S,null,2)], {type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "continuity-binder-backup.json"; a.click(); URL.revokeObjectURL(a.href);
+  toast("Backup downloaded");
+});
+$("importJsonBtn").addEventListener("click", ()=> $("importFile").click());
+$("importFile").addEventListener("change", e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ try{ const p = JSON.parse(r.result); const b = blank(); S = Object.assign(b,p); save(); applyTheme(); renderAll(); toast("Backup restored"); }catch(err){ toast("Invalid backup file"); } };
+  r.readAsText(f); e.target.value="";
+});
+$("exportCsvBtn").addEventListener("click", ()=>{
+  const rows = [["Name","Role","Phone","Email","Notes"]].concat(S.contacts.map(c=>[c.name,c.role,c.phone,c.email,c.notes]));
+  const csv = rows.map(r=>r.map(x=>'"'+String(x||"").replace(/"/g,'""')+'"').join(",")).join("\n");
+  const blob = new Blob([csv], {type:"text/csv"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "key-contacts.csv"; a.click(); URL.revokeObjectURL(a.href);
+  toast("Contacts exported");
+});
+$("wipeBtn").addEventListener("click", ()=>{
+  if(confirm("Erase ALL binder data? This cannot be undone.")){ S = blank(); save(); applyTheme(); renderAll(); toast("All data erased"); }
+});
+$("printBtn").addEventListener("click", ()=> window.print());
+/* ================= INIT ================= */
+load(); renderAll();
+</script>
+
+<!-- ===== LEDGERLOOPSTUDIO DEMO ENTRY LIMIT (10) ===== -->
+<script>
+(function(){
+  var DEMO_LIMIT = 10;
+  var DEMO_MSG = "Demo limit reached (10 entries). Get the full version on Etsy for unlimited entries!";
+  var addCount = 0;
+  function isAddButton(el){
+    if (!el || !el.textContent) return false;
+    var t = el.textContent.trim().toLowerCase();
+    if (t.indexOf('theme') > -1 || t.indexOf('font') > -1 || t.indexOf('mode') > -1) return false;
+    var addWords = ['add', 'save', 'create'];
+    for (var i = 0; i < addWords.length; i++){
+      if (t === addWords[i] || t.indexOf(addWords[i]+' ') === 0) return true;
+    }
+    if (t === '+') return true;
+    return false;
+  }
+  function showMsg(){
+    try { if (typeof toast === 'function') toast(DEMO_MSG); else alert(DEMO_MSG); }
+    catch(e){ alert(DEMO_MSG); }
+  }
+  function updateCounter(){
+    var c = document.getElementById('demo-entry-counter');
+    if (c) c.textContent = addCount + '/' + DEMO_LIMIT + ' entries used';
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('button,input[type="submit"],input[type="button"]') : null;
+    if (!btn || !isAddButton(btn)) return;
+    if (addCount >= DEMO_LIMIT) {
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+      showMsg(); return false;
+    }
+    addCount++; updateCounter();
+  }, true);
+  document.addEventListener('submit', function(e){
+    if (addCount >= DEMO_LIMIT) {
+      e.preventDefault(); e.stopPropagation(); showMsg(); return false;
+    }
+    addCount++; updateCounter();
+  }, true);
+})();
+</script>
+<!-- ===== /DEMO LIMIT ===== -->
+
+</body>
+</html>
